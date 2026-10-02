@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ЧЕКАТ | Кыргызские веб-комиксы, манхва и форум</title>
-    <!-- Tailwind CSS CDN -->
+    <title>ЧЕКАТ | Кыргызские веб-комиксы и манхва</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -37,7 +34,6 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Neon Leopard Theme (Default Dark Cyber) */
         body.theme-cyber {
             background-color: #080C14;
             color: #E2E8F0;
@@ -45,17 +41,10 @@
         body.theme-cyber .glow-effect {
             box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
         }
-        body.theme-cyber .accent-text {
-            color: #00F2FE;
-        }
-        body.theme-cyber .border-glow {
-            border-color: rgba(0, 242, 254, 0.4);
-        }
         body.theme-cyber .bg-card-theme {
             background: linear-gradient(145deg, #101726, #0B0F19);
         }
 
-        /* Gold Saimaluu-Tash Theme */
         body.theme-gold {
             background-color: #0E0C0A;
             color: #F3EFEA;
@@ -63,17 +52,10 @@
         body.theme-gold .glow-effect {
             box-shadow: 0 0 25px rgba(255, 153, 0, 0.25);
         }
-        body.theme-gold .accent-text {
-            color: #FF9900;
-        }
-        body.theme-gold .border-glow {
-            border-color: rgba(255, 153, 0, 0.4);
-        }
         body.theme-gold .bg-card-theme {
             background: linear-gradient(145deg, #1C1814, #120F0D);
         }
 
-        /* Custom Speech Bubble */
         .speech-bubble {
             position: relative;
             background: #ffffff;
@@ -94,7 +76,6 @@
             width: 0;
         }
 
-        /* Scrollbar styles */
         .custom-scrollbar::-webkit-scrollbar {
             width: 8px;
         }
@@ -105,18 +86,12 @@
             background: rgba(255, 255, 255, 0.2);
             border-radius: 4px;
         }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.4);
-        }
     </style>
 </head>
 <body class="theme-cyber min-h-screen flex flex-col justify-between antialiased selection:bg-cyan-500 selection:text-black">
 
-    <!-- HEADER SECTION -->
     <header class="sticky top-0 z-40 backdrop-blur-md bg-opacity-80 bg-black/60 border-b border-white/10 px-4 lg:px-8 py-3 transition-all">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-            
-            <!-- Logo -->
             <a href="#" class="flex items-center gap-3 group">
                 <div class="relative w-11 h-11 flex items-center justify-center rounded-xl bg-gradient-to-tr from-cyan-500 via-teal-400 to-amber-500 p-0.5 group-hover:scale-105 transition-transform duration-300">
                     <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
@@ -139,32 +114,31 @@
                 </div>
             </a>
 
-            <!-- Nav Links -->
             <nav class="hidden md:flex items-center gap-6 font-montserrat text-sm font-semibold text-gray-300">
                 <a href="#featured" class="hover:text-cyan-400 transition-colors">Манхвы</a>
-                <a href="#forum" class="hover:text-cyan-400 transition-colors">Форум & Отзывы</a>
-                <a href="#admin" class="hover:text-amber-400 transition-colors flex items-center gap-1.5 text-amber-300">
-                    <i class="fa-solid fa-lock text-xs"></i> Админ-панель
-                </a>
+                <a href="#forum" class="hover:text-cyan-400 transition-colors">Форум</a>
+                <div id="adminNavBadge" class="hidden items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold">
+                    <i class="fa-solid fa-shield-halved"></i> Режим Админа Активен
+                </div>
             </nav>
 
-            <!-- Actions & Theme Toggle -->
             <div class="flex items-center gap-3">
                 <button id="themeToggleBtn" onclick="toggleTheme()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-xs font-semibold transition-all">
                     <span id="themeIcon">🐆</span>
                     <span id="themeLabel" class="hidden sm:inline">Барс (Неон)</span>
                 </button>
 
-                <!-- Connection status indicator -->
-                <div class="hidden lg:flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    Firebase БД активна
+                <div class="flex items-center gap-2 bg-slate-900 border border-white/20 rounded-xl px-3 py-1.5 text-xs">
+                    <span class="text-gray-400">Роль в Firebase:</span>
+                    <select id="userRoleSelect" onchange="switchUserRole(this.value)" class="bg-slate-950 text-cyan-400 font-bold focus:outline-none">
+                        <option value="user">User (Читатель)</option>
+                        <option value="admin">Admin (Администратор)</option>
+                    </select>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="relative overflow-hidden py-10 px-4 lg:px-8 border-b border-white/5">
         <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-amber-500/5 to-purple-500/10 pointer-events-none blur-3xl"></div>
         
@@ -172,7 +146,7 @@
             <div class="lg:col-span-7 space-y-4 text-center lg:text-left">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-400/30 bg-cyan-400/10 text-cyan-300 text-xs font-semibold">
                     <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                    Синхронизация с Firebase в реальном времени
+                    Синхронизация с Firebase Realtime Database
                 </div>
                 
                 <h2 class="font-montserrat font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-none text-white">
@@ -181,19 +155,17 @@
                 </h2>
 
                 <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                    Читайте вебтуны, добавляйте новые комиксы через панель управления и общайтесь с сообществом на живом форуме базы данных!
+                    Все главы, сюжеты, панели и роли управляются напрямую через вашу базу данных Firebase.
                 </p>
 
-                <!-- Search Input Bar -->
                 <div class="pt-2 max-w-lg mx-auto lg:mx-0 flex gap-2">
                     <div class="relative flex-grow">
-                        <input type="text" id="searchInput" oninput="filterManhwas()" placeholder="Поиск манхвы по названию или описанию..." class="w-full bg-slate-900/90 border border-white/20 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 text-white placeholder-gray-400 transition-all shadow-lg">
+                        <input type="text" id="searchInput" oninput="filterManhwas()" placeholder="Поиск манхвы в базе..." class="w-full bg-slate-900/90 border border-white/20 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 text-white placeholder-gray-400 transition-all shadow-lg">
                         <i class="fa-solid fa-search absolute right-4 top-3.5 text-gray-400"></i>
                     </div>
                 </div>
             </div>
 
-            <!-- Hero Stats Box -->
             <div class="lg:col-span-5 flex justify-center">
                 <div class="w-full max-w-md bg-card-theme border border-white/10 rounded-2xl p-6 glow-effect space-y-4">
                     <div class="flex items-center justify-between border-b border-white/10 pb-4">
@@ -202,11 +174,11 @@
                                 <i class="fa-solid fa-database"></i>
                             </div>
                             <div>
-                                <h4 class="font-montserrat font-bold text-sm text-white">Статус Firebase</h4>
+                                <h4 class="font-montserrat font-bold text-sm text-white">Firebase Статус</h4>
                                 <p class="text-[11px] text-gray-400">chekat-60294-default-rtdb</p>
                             </div>
                         </div>
-                        <span class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 text-xs font-bold border border-cyan-500/40">ONLINE</span>
+                        <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">ONLINE</span>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 pt-2">
@@ -215,7 +187,7 @@
                             <h3 id="statTotalManhwas" class="text-2xl font-black text-white mt-1">0</h3>
                         </div>
                         <div class="bg-black/30 p-4 rounded-xl border border-white/5 text-center">
-                            <p class="text-xs text-gray-400">Сообщений форума</p>
+                            <p class="text-xs text-gray-400">Комментариев</p>
                             <h3 id="statTotalComments" class="text-2xl font-black text-amber-400 mt-1">0</h3>
                         </div>
                     </div>
@@ -224,7 +196,6 @@
         </div>
     </section>
 
-    <!-- MAIN MANHWA CATALOG SECTION -->
     <main id="featured" class="max-w-7xl mx-auto px-4 lg:px-8 py-12 flex-grow w-full">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
@@ -232,17 +203,22 @@
                     <span class="w-3 h-8 bg-gradient-to-b from-cyan-400 to-amber-500 rounded-full inline-block"></span>
                     Каталог манхв из Firebase
                 </h3>
-                <p class="text-xs sm:text-sm text-gray-400 mt-1">Данные загружаются в реальном времени из облачной базы</p>
+                <p class="text-xs sm:text-sm text-gray-400 mt-1">Загрузка глав, страниц и контента напрямую из базы данных</p>
+            </div>
+
+            <!-- Admin-only Quick Action Bar (Visible only when role is admin) -->
+            <div id="adminActionBar" class="hidden items-center gap-3">
+                <div class="px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 rounded-xl text-xs font-semibold flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Админ-доступ: редактируйте данные через Firebase Console
+                </div>
             </div>
 
             <button onclick="loadDataFromFirebase()" class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-xs font-semibold text-white flex items-center gap-2 transition-all">
-                <i class="fa-solid fa-rotate"></i> Обновить данные
+                <i class="fa-solid fa-rotate"></i> Синхронизировать
             </button>
         </div>
 
-        <!-- Manhwas Grid Container -->
         <div id="manhwasContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Loaded dynamically via JS -->
             <div class="col-span-full py-16 text-center text-gray-400">
                 <i class="fa-solid fa-spinner fa-spin text-3xl text-cyan-400 mb-3"></i>
                 <p>Загрузка данных из Firebase...</p>
@@ -250,122 +226,43 @@
         </div>
     </main>
 
-    <!-- ADMIN PANEL SECTION -->
-    <section id="admin" class="py-12 bg-black/50 border-t border-white/10 px-4 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex items-center justify-between mb-8">
-                <div>
-                    <h3 class="text-2xl font-montserrat font-black text-white flex items-center gap-3">
-                        <i class="fa-solid fa-shield-halved text-amber-400"></i> Панель управления (Админ)
-                    </h3>
-                    <p class="text-xs text-gray-400 mt-1">Добавляйте или удаляйте манхвы в базе данных Firebase в один клик</p>
-                </div>
-            </div>
-
-            <div class="grid lg:grid-cols-12 gap-8">
-                <!-- Add Form -->
-                <div class="lg:col-span-5 bg-card-theme border border-white/10 rounded-2xl p-6 shadow-xl space-y-4">
-                    <h4 class="font-montserrat font-bold text-base text-white border-b border-white/10 pb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-plus-circle text-cyan-400"></i> Добавить новую манхву
-                    </h4>
-
-                    <form id="addManhwaForm" onsubmit="handleAddNewManhwa(event)" class="space-y-4 text-xs">
-                        <div>
-                            <label class="block font-semibold text-gray-300 mb-1">Название манхвы</label>
-                            <input type="text" id="adminTitle" required placeholder="Например: Манас: Возрождение" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-400">
-                        </div>
-
-                        <div>
-                            <label class="block font-semibold text-gray-300 mb-1">Категория / Жанр</label>
-                            <input type="text" id="adminCategory" required placeholder="Эпос / Киберпанк / Фэнтези" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-400">
-                        </div>
-
-                        <div>
-                            <label class="block font-semibold text-gray-300 mb-1">Автор / Художник</label>
-                            <input type="text" id="adminAuthor" required placeholder="Имя автора" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-400">
-                        </div>
-
-                        <div>
-                            <label class="block font-semibold text-gray-300 mb-1">Описание сюжета</label>
-                            <textarea id="adminDescription" rows="3" required placeholder="Краткое описание сюжета манхвы..." class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-400 custom-scrollbar"></textarea>
-                        </div>
-
-                        <div>
-                            <label class="block font-semibold text-gray-300 mb-1">Цветовая тема карточки</label>
-                            <select id="adminTheme" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-400">
-                                <option value="cyan">Кибернетический Неон (Cyan)</option>
-                                <option value="amber">Золотой Саймалуу (Amber)</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-montserrat font-bold text-xs uppercase transition-all shadow-lg shadow-cyan-500/20">
-                            Сохранить в Firebase
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Admin Records List / Quick Manager -->
-                <div class="lg:col-span-7 bg-card-theme border border-white/10 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
-                    <div>
-                        <h4 class="font-montserrat font-bold text-base text-white border-b border-white/10 pb-3 mb-4 flex items-center justify-between">
-                            <span><i class="fa-solid fa-list-check text-amber-400 mr-2"></i> Управление записями в базе</span>
-                            <span id="adminRecordsCount" class="text-xs bg-white/10 px-2.5 py-1 rounded-md">0 записей</span>
-                        </h4>
-
-                        <div id="adminRecordsList" class="space-y-3 max-h-[380px] overflow-y-auto custom-scrollbar pr-2">
-                            <!-- Populated via JS -->
-                        </div>
-                    </div>
-
-                    <div class="pt-4 border-t border-white/10 text-right text-[11px] text-gray-400">
-                        Все изменения сохраняются напрямую в Firebase Realtime Database
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- COMMUNITY FORUM & COMMENTS SECTION -->
-    <section id="forum" class="py-12 px-4 lg:px-8 border-t border-white/10">
+    <section id="forum" class="py-12 px-4 lg:px-8 border-t border-white/10 bg-black/40">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-10">
                 <h3 class="text-2xl sm:text-3xl font-montserrat font-black text-white">Форум сообщества и отзывы</h3>
-                <p class="text-xs sm:text-sm text-gray-400 mt-1">Делитесь впечатлениями о манхвах и общайтесь с другими читателями</p>
+                <p class="text-xs sm:text-sm text-gray-400 mt-1">Синхронизировано с Firebase Realtime Database</p>
             </div>
 
-            <!-- Comment Form -->
             <div class="bg-card-theme border border-white/10 rounded-2xl p-6 shadow-xl mb-8">
                 <form id="commentForm" onsubmit="handlePostComment(event)" class="space-y-4">
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-semibold text-gray-300 mb-1">Ваше имя / Ник</label>
-                            <input type="text" id="commentAuthor" required placeholder="Например: Бакыт Читатель" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400">
+                            <label class="block text-xs font-semibold text-gray-300 mb-1">Ваше имя</label>
+                            <input type="text" id="commentAuthor" required placeholder="Бакыт Читатель" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-gray-300 mb-1">Какая манхва обсуждается?</label>
-                            <input type="text" id="commentTopic" required placeholder="Например: Спаситель Саймалуу-Таш" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400">
+                            <label class="block text-xs font-semibold text-gray-300 mb-1">Манхва / Тема</label>
+                            <input type="text" id="commentTopic" required placeholder="Спаситель Саймалуу-Таш" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">Текст сообщения</label>
-                        <textarea id="commentText" rows="3" required placeholder="Напишите ваш отзыв или вопрос..." class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400 custom-scrollbar"></textarea>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">Сообщение</label>
+                        <textarea id="commentText" rows="3" required placeholder="Ваш отзыв..." class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400 custom-scrollbar"></textarea>
                     </div>
                     <div class="flex justify-end">
-                        <button type="submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-montserrat font-bold text-xs transition-all shadow-md shadow-amber-500/20">
-                            Отправить на форум
+                        <button type="submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-montserrat font-bold text-xs transition-all shadow-md">
+                            Опубликовать
                         </button>
                     </div>
                 </form>
             </div>
 
-            <!-- Comments Feed -->
             <div id="commentsContainer" class="space-y-4">
                 <!-- Loaded via JS -->
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="border-t border-white/10 py-8 px-4 lg:px-8 bg-slate-950 text-gray-400 text-xs">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
             <div>
@@ -375,13 +272,11 @@
 
             <div class="flex items-center gap-6 text-gray-400">
                 <a href="#featured" class="hover:text-cyan-400 transition-colors">Манхвы</a>
-                <a href="#admin" class="hover:text-cyan-400 transition-colors">Админ-панель</a>
                 <a href="#forum" class="hover:text-cyan-400 transition-colors">Форум</a>
             </div>
         </div>
     </footer>
 
-    <!-- COMIC READER MODAL -->
     <div id="readerModal" class="fixed inset-0 z-50 bg-black/95 hidden flex flex-col items-center justify-between backdrop-blur-xl transition-opacity">
         <div class="w-full bg-slate-900/90 border-b border-white/10 px-4 py-3 flex items-center justify-between z-20">
             <div class="flex items-center gap-3">
@@ -390,27 +285,33 @@
                 </button>
                 <div>
                     <h4 id="readerTitle" class="font-montserrat font-bold text-sm text-white">Название Манхвы</h4>
-                    <p id="readerSubtitle" class="text-[10px] text-gray-400">Глава 1</p>
+                    <p id="readerChapterTitle" class="text-[10px] text-cyan-400 font-semibold">Глава 1</p>
                 </div>
+            </div>
+
+            <!-- Chapter Selector Dropdown in Reader -->
+            <div class="flex items-center gap-2">
+                <select id="chapterSelect" onchange="switchChapterFromDropdown(this.value)" class="bg-slate-950 border border-white/20 text-white text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-cyan-400">
+                    <!-- Loaded dynamically -->
+                </select>
             </div>
         </div>
 
         <div id="readerContent" class="w-full max-w-2xl flex-grow overflow-y-auto custom-scrollbar p-4 space-y-6 my-auto">
-            <!-- Panels generated dynamically -->
+            <!-- Panels and pages injected here -->
         </div>
 
-        <div class="w-full bg-slate-900/90 border-t border-white/10 px-4 py-3 flex items-center justify-center gap-4 z-20 text-xs">
-            <button class="px-4 py-2 rounded-lg bg-white/5 text-gray-400 border border-white/10 cursor-not-allowed">
-                ← Пред. глава
+        <div class="w-full bg-slate-900/90 border-t border-white/10 px-4 py-3 flex items-center justify-between max-w-2xl z-20 text-xs">
+            <button onclick="navigateChapter(-1)" id="prevChapterBtn" class="px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-all flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-left"></i> Пред. глава
             </button>
-            <span class="text-gray-400 font-medium">Вебтун читалка ЧЕКАТ</span>
-            <button class="px-4 py-2 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/30">
-                След. глава →
+            <span id="chapterIndicator" class="text-gray-400 font-medium">Глава 1 из 1</span>
+            <button onclick="navigateChapter(1)" id="nextChapterBtn" class="px-4 py-2 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/30 transition-all flex items-center gap-1.5">
+                След. глава <i class="fa-solid fa-arrow-right"></i>
             </button>
         </div>
     </div>
 
-    <!-- NOTIFICATION TOAST -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center space-x-3 bg-slate-900 border border-slate-700 text-white px-5 py-4 rounded-2xl shadow-2xl">
         <div id="toastIconWrapper" class="w-8 h-8 rounded-xl flex items-center justify-center bg-emerald-500/20 text-emerald-400">
             <i id="toastIcon" class="fa-solid fa-check"></i>
@@ -418,13 +319,17 @@
         <span id="toastMessage" class="text-xs font-semibold">Успешно</span>
     </div>
 
-    <!-- JAVASCRIPT LOGIC & FIREBASE REST API INTEGRATION -->
     <script>
         const FIREBASE_URL = "https://chekat-60294-default-rtdb.firebaseio.com/";
         let dbCache = { manhwas: {}, comments: {} };
         let currentTheme = 'cyber';
+        let currentUserRole = 'user'; // 'user' or 'admin'
+        
+        // Active reader state
+        let activeManhwasId = null;
+        let activeChapterIndex = 0;
+        let activeManhwaChaptersList = [];
 
-        // Toast Notification system
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
             const msg = document.getElementById('toastMessage');
@@ -446,7 +351,6 @@
             }, 3500);
         }
 
-        // Theme Switcher
         function toggleTheme() {
             const body = document.body;
             const themeIcon = document.getElementById('themeIcon');
@@ -467,6 +371,28 @@
             }
         }
 
+        // Switch role simulation (user vs admin)
+        function switchUserRole(role) {
+            currentUserRole = role;
+            const navBadge = document.getElementById('adminNavBadge');
+            const adminBar = document.getElementById('adminActionBar');
+
+            if (role === 'admin') {
+                navBadge.classList.remove('hidden');
+                navBadge.classList.add('flex');
+                adminBar.classList.remove('hidden');
+                adminBar.classList.add('flex');
+                showToast("Включен режим администратора (роль: admin)");
+            } else {
+                navBadge.classList.remove('flex');
+                navBadge.classList.add('hidden');
+                adminBar.classList.remove('flex');
+                adminBar.classList.add('hidden');
+                showToast("Включен режим читателя (роль: user)");
+            }
+            renderManhwas();
+        }
+
         // Load all data from Firebase Realtime Database
         async function loadDataFromFirebase() {
             try {
@@ -478,23 +404,21 @@
                     dbCache.manhwas = data.manhwas || {};
                     dbCache.comments = data.comments || {};
                 } else {
-                    // Initialize with default sample data if empty
                     await seedDefaultData();
                 }
 
                 renderManhwas();
-                renderAdminList();
                 renderComments();
                 updateStats();
+                showToast("Данные успешно загружены из Firebase!");
             } catch (error) {
                 console.error("Firebase load error:", error);
                 showToast("Не удалось подключиться к Firebase БД", true);
-                // Fallback default mock data
                 loadDefaultMockData();
             }
         }
 
-        // Default seed data if database is brand new
+        // Seed initial data structure supporting multiple chapters and panels in Firebase
         async function seedDefaultData() {
             const defaults = {
                 manhwas: {
@@ -502,22 +426,50 @@
                         title: "Спаситель Саймалуу-Таш",
                         category: "Фэнтези / Мифология",
                         author: "Азамат Т.",
-                        description: "История о молодом батыре, который открывает секрет древних петроглифов Саймалуу-Таш. Когда темные духи гор пробуждаются, он должен собрать силу предков и руны.",
-                        theme: "amber"
+                        description: "История о молодом батыре, который открывает секрет древних петроглифов Саймалуу-Таш.",
+                        theme: "amber",
+                        chapters: {
+                            "ch1": {
+                                title: "Глава 1: Пробуждение камней",
+                                panels: [
+                                    { type: "intro", text: "Высоко в горах Ферганского хребта лежит святилище Саймалуу-Таш..." },
+                                    { type: "dialogue", speaker: "Азат", speech: "Неужели легенды аксакалов правдивы? Символы светятся золотом!" },
+                                    { type: "panel", title: "Панель 1", text: "Магическая энергия древних петроглифов наполняет долину." }
+                                ]
+                            },
+                            "ch2": {
+                                title: "Глава 2: Зов предков",
+                                panels: [
+                                    { type: "intro", text: "Ночь сменяет день, и руны начинают говорить на языке батыров..." },
+                                    { type: "dialogue", speaker: "Старейшина", speech: "Береги этот дар, юный страж!" },
+                                    { type: "panel", title: "Панель 1", text: "Дух гор пробуждается в полную силу." }
+                                ]
+                            }
+                        }
                     },
                     "m2": {
                         title: "Хранитель Снежных Гор",
                         category: "Киберпанк / Экшен",
                         author: "Нурбек К.",
-                        description: "В футуристическом Бишкеке 2088 года нефритовый барс — кибернетический дух-защитник — выбирает обычного студента для борьбы с корпорациями.",
-                        theme: "cyan"
+                        description: "В футуристическом Бишкеке 2088 года нефритовый барс защищает природу Тянь-Шаня.",
+                        theme: "cyan",
+                        chapters: {
+                            "ch1": {
+                                title: "Глава 1: Неоновый Бишкек",
+                                panels: [
+                                    { type: "intro", text: "Бишкек, 2088 год. Небоскребы корпораций против экологии гор..." },
+                                    { type: "dialogue", speaker: "Арсен", speech: "Мой нейро-сканер зафиксировал аномалию!" },
+                                    { type: "panel", title: "Панель 1", text: "Появление кибернетического ирбиса." }
+                                ]
+                            }
+                        }
                     }
                 },
                 comments: {
                     "c1": {
                         author: "Айсулуу",
                         topic: "Спаситель Саймалуу-Таш",
-                        text: "Потрясающая рисовка и атмосфера! Жду следующую главу.",
+                        text: "Потрясающая рисовка и несколько глав! Жду продолжения.",
                         date: "03.10.2026"
                     }
                 }
@@ -537,27 +489,22 @@
             dbCache.manhwas = {
                 "m1": {
                     title: "Спаситель Саймалуу-Таш",
-                    category: "Фэнтези / Мифология",
+                    category: "Фэнтези",
                     author: "Азамат Т.",
-                    description: "История о молодом батыре, который открывает секрет древних петроглифов Саймалуу-Таш.",
-                    theme: "amber"
-                },
-                "m2": {
-                    title: "Хранитель Снежных Гор",
-                    category: "Киберпанк / Экшен",
-                    author: "Нурбек К.",
-                    description: "В футуристическом Бишкеке 2088 года нефритовый барс защищает природу Тянь-Шаня.",
-                    theme: "cyan"
+                    description: "Эпическая манхва с множеством глав.",
+                    theme: "amber",
+                    chapters: {
+                        "ch1": { title: "Глава 1", panels: [{ type: "intro", text: "Начало истории..." }] }
+                    }
                 }
             };
             dbCache.comments = {};
             renderManhwas();
-            renderAdminList();
             renderComments();
             updateStats();
         }
 
-        // Render Manhwas Catalog Grid
+        // Render Manhwas Catalog Grid with Admin Status Check
         function renderManhwas(filterQuery = "") {
             const container = document.getElementById('manhwasContainer');
             container.innerHTML = "";
@@ -580,15 +527,30 @@
                 const badgeBg = isAmber ? 'bg-amber-500 text-slate-950' : 'bg-cyan-400 text-slate-950';
                 const btnGradient = isAmber ? 'from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950' : 'from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950';
 
+                const chaptersCount = item.chapters ? Object.keys(item.chapters).length : 0;
+
                 const card = document.createElement('article');
-                card.className = `bg-card-theme border ${borderColor} rounded-2xl overflow-hidden transition-all duration-300 flex flex-col justify-between group shadow-xl`;
+                card.className = `bg-card-theme border ${borderColor} rounded-2xl overflow-hidden transition-all duration-300 flex flex-col justify-between group shadow-xl relative`;
                 
+                let adminBadgeHtml = '';
+                if (currentUserRole === 'admin') {
+                    adminBadgeHtml = `
+                        <div class="absolute top-3 right-3 z-35 bg-amber-500 text-slate-950 font-bold text-[10px] px-2.5 py-1 rounded-lg shadow-lg flex items-center gap-1">
+                            <i class="fa-solid fa-gear"></i> Firebase ID: ${id}
+                        </div>
+                    `;
+                }
+
                 card.innerHTML = `
+                    ${adminBadgeHtml}
                     <div>
                         <div class="relative h-48 bg-slate-900 overflow-hidden flex items-center justify-center p-6 border-b border-white/10">
                             <div class="absolute top-4 left-4 z-20 flex gap-2">
                                 <span class="${badgeBg} font-bold text-[10px] uppercase px-2.5 py-1 rounded-md">
                                     ${escapeHtml(item.category)}
+                                </span>
+                                <span class="bg-black/60 text-white text-[10px] font-semibold px-2 py-1 rounded-md">
+                                    Глав: ${chaptersCount}
                                 </span>
                             </div>
                             <div class="text-center">
@@ -600,7 +562,6 @@
                         <div class="p-6 space-y-3">
                             <div class="flex items-center justify-between text-xs text-gray-400">
                                 <span>Автор: <strong class="text-gray-200">${escapeHtml(item.author)}</strong></span>
-                                <span>ID: ${id.substring(0, 5)}...</span>
                             </div>
                             <h4 class="text-xl font-montserrat font-bold text-white">${escapeHtml(item.title)}</h4>
                             <p class="text-gray-300 text-xs sm:text-sm leading-relaxed line-clamp-3">${escapeHtml(item.description)}</p>
@@ -608,8 +569,8 @@
                     </div>
 
                     <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-white/5 mt-auto">
-                        <span class="text-[11px] text-gray-400">Глава 1 (Онгоинг)</span>
-                        <button onclick="openReader('${escapeHtml(item.title)}')" class="px-5 py-2 rounded-xl bg-gradient-to-r ${btnGradient} font-montserrat font-bold text-xs transition-all shadow-md">
+                        <span class="text-[11px] text-gray-400">Доступно глав: ${chaptersCount}</span>
+                        <button onclick="openReader('${id}')" class="px-5 py-2 rounded-xl bg-gradient-to-r ${btnGradient} font-montserrat font-bold text-xs transition-all shadow-md">
                             Читать вебтун →
                         </button>
                     </div>
@@ -618,95 +579,120 @@
             });
 
             if (count === 0) {
-                container.innerHTML = `<div class="col-span-full py-12 text-center text-gray-400">Манхвы не найдены по вашему запросу.</div>`;
+                container.innerHTML = `<div class="col-span-full py-12 text-center text-gray-400">Манхвы не найдены.</div>`;
             }
         }
 
-        // Search filter input listener
         function filterManhwas() {
             const query = document.getElementById('searchInput').value;
             renderManhwas(query);
         }
 
-        // Render Admin list of records for deletion/management
-        function renderAdminList() {
-            const listEl = document.getElementById('adminRecordsList');
-            const countEl = document.getElementById('adminRecordsCount');
-            listEl.innerHTML = "";
-
-            const entries = Object.entries(dbCache.manhwas || {});
-            countEl.textContent = `${entries.length} записей`;
-
-            if (entries.length === 0) {
-                listEl.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">Нет записей в базе данных.</p>`;
+        // Open Comic Reader with full chapter navigation support
+        function openReader(manhwaId) {
+            const manhwa = dbCache.manhwas[manhwaId];
+            if (!manhwa || !manhwa.chapters) {
+                showToast("У этой манхвы пока нет глав в базе данных", true);
                 return;
             }
 
-            entries.forEach(([id, item]) => {
-                const div = document.createElement('div');
-                div.className = "flex items-center justify-between p-3 bg-slate-900/80 border border-white/10 rounded-xl text-xs";
-                div.innerHTML = `
-                    <div class="truncate pr-3">
-                        <strong class="text-white">${escapeHtml(item.title)}</strong>
-                        <span class="text-gray-400 ml-2">(${escapeHtml(item.category)})</span>
-                    </div>
-                    <button onclick="deleteManhwa('${id}')" class="px-3 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 font-semibold transition-colors flex items-center gap-1">
-                        <i class="fa-solid fa-trash text-[10px]"></i> Удалить
-                    </button>
-                `;
-                listEl.appendChild(div);
+            activeManhwasId = manhwaId;
+            activeManhwaChaptersList = Object.entries(manhwa.chapters); // [[chId, chObj], ...]
+            activeChapterIndex = 0;
+
+            document.getElementById('readerTitle').textContent = manhwa.title;
+            populateChapterDropdown();
+            renderActiveChapter();
+
+            document.getElementById('readerModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function populateChapterDropdown() {
+            const select = document.getElementById('chapterSelect');
+            select.innerHTML = "";
+
+            activeManhwaChaptersList.forEach(([chId, chObj], idx) => {
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = chObj.title || `Глава ${idx + 1}`;
+                if (idx === activeChapterIndex) opt.selected = true;
+                select.appendChild(opt);
             });
         }
 
-        // Add new Manhwa via Admin Form to Firebase
-        async function handleAddNewManhwa(event) {
-            event.preventDefault();
-            const newManhwa = {
-                title: document.getElementById('adminTitle').value,
-                category: document.getElementById('adminCategory').value,
-                author: document.getElementById('adminAuthor').value,
-                description: document.getElementById('adminDescription').value,
-                theme: document.getElementById('adminTheme').value
-            };
+        function renderActiveChapter() {
+            if (activeManhwaChaptersList.length === 0) return;
 
-            try {
-                const response = await fetch(`${FIREBASE_URL}/chekat_data/manhwas.json`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newManhwa)
-                });
+            const [chId, chObj] = activeManhwaChaptersList[activeChapterIndex];
+            document.getElementById('readerChapterTitle').textContent = chObj.title || `Глава ${activeChapterIndex + 1}`;
+            document.getElementById('chapterIndicator').textContent = `Глава ${activeChapterIndex + 1} из ${activeManhwaChaptersList.length}`;
 
-                if (!response.ok) throw new Error('Ошибка сохранения');
+            // Sync dropdown
+            document.getElementById('chapterSelect').value = activeChapterIndex;
 
-                showToast("Манхва успешно добавлена в Firebase!");
-                document.getElementById('addManhwaForm').reset();
-                loadDataFromFirebase();
-            } catch (err) {
-                console.error(err);
-                showToast("Ошибка при добавлении в базу данных", true);
+            // Nav buttons state
+            document.getElementById('prevChapterBtn').disabled = activeChapterIndex === 0;
+            document.getElementById('prevChapterBtn').style.opacity = activeChapterIndex === 0 ? '0.5' : '1';
+            
+            document.getElementById('nextChapterBtn').disabled = activeChapterIndex === activeManhwaChaptersList.length - 1;
+            document.getElementById('nextChapterBtn').style.opacity = activeChapterIndex === activeManhwaChaptersList.length - 1 ? '0.5' : '1';
+
+            const container = document.getElementById('readerContent');
+            container.innerHTML = "";
+
+            if (!chObj.panels || chObj.panels.length === 0) {
+                container.innerHTML = `<div class="text-center text-gray-400 py-12">В этой главе пока нет страниц или панелей.</div>`;
+                return;
+            }
+
+            chObj.panels.forEach((panel, pIdx) => {
+                const el = document.createElement('div');
+                if (panel.type === 'intro') {
+                    el.className = `p-6 rounded-2xl bg-gradient-to-b from-cyan-950 to-slate-950 border border-white/10 text-center text-sm font-medium text-gray-200 shadow-lg`;
+                    el.innerHTML = `<p class="italic">"${escapeHtml(panel.text)}"</p>`;
+                } else if (panel.type === 'dialogue') {
+                    el.className = "flex flex-col items-start space-y-1 my-3";
+                    el.innerHTML = `
+                        <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-widest pl-2">${escapeHtml(panel.speaker || 'Персонаж')}</span>
+                        <div class="speech-bubble text-xs text-slate-950 font-semibold shadow-md">
+                            ${escapeHtml(panel.speech || '')}
+                        </div>
+                    `;
+                } else {
+                    el.className = "p-4 rounded-2xl bg-slate-900 border border-white/10 space-y-3 shadow-xl";
+                    el.innerHTML = `
+                        <div class="text-[10px] uppercase font-bold text-cyan-400 tracking-wider">${escapeHtml(panel.title || `Панель ${pIdx + 1}`)}</div>
+                        <div class="rounded-xl overflow-hidden bg-black/50 border border-white/5 p-6 text-center text-cyan-300 font-bold">
+                            [ Иллюстрация панели вебтуна ]
+                        </div>
+                        <p class="text-xs text-gray-300 font-medium">${escapeHtml(panel.text || '')}</p>
+                    `;
+                }
+                container.appendChild(el);
+            });
+        }
+
+        function switchChapterFromDropdown(val) {
+            activeChapterIndex = parseInt(val);
+            renderActiveChapter();
+        }
+
+        function navigateChapter(direction) {
+            const newIdx = activeChapterIndex + direction;
+            if (newIdx >= 0 && newIdx < activeManhwaChaptersList.length) {
+                activeChapterIndex = newIdx;
+                renderActiveChapter();
+                document.getElementById('readerContent').scrollTop = 0;
             }
         }
 
-        // Delete Manhwa from Firebase
-        async function deleteManhwa(id) {
-            if (!confirm("Вы уверены, что хотите удалить эту манхву из Firebase?")) return;
-
-            try {
-                const response = await fetch(`${FIREBASE_URL}/chekat_data/manhwas/${id}.json`, {
-                    method: 'DELETE'
-                });
-
-                if (!response.ok) throw new Error('Ошибка удаления');
-
-                showToast("Манхва успешно удалена!");
-                loadDataFromFirebase();
-            } catch (err) {
-                console.error(err);
-                showToast("Не удалось удалить запись", true);
-            }
+        function closeReader() {
+            document.getElementById('readerModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
 
-        // Post Comment to Community Forum
+        // Post comment to Firebase forum
         async function handlePostComment(event) {
             event.preventDefault();
             const newComment = {
@@ -723,25 +709,24 @@
                     body: JSON.stringify(newComment)
                 });
 
-                if (!response.ok) throw new Error('Ошибка отправки комментария');
+                if (!response.ok) throw new Error('Ошибка отправки');
 
-                showToast("Сообщение опубликовано на форуме!");
+                showToast("Комментарий добавлен в Firebase!");
                 document.getElementById('commentForm').reset();
                 loadDataFromFirebase();
             } catch (err) {
                 console.error(err);
-                showToast("Ошибка публикации сообщения", true);
+                showToast("Ошибка публикации", true);
             }
         }
 
-        // Render Forum Comments
         function renderComments() {
             const container = document.getElementById('commentsContainer');
             container.innerHTML = "";
 
             const entries = Object.entries(dbCache.comments || {});
             if (entries.length === 0) {
-                container.innerHTML = `<div class="text-center text-xs text-gray-500 py-6 bg-card-theme rounded-2xl border border-white/5">Пока нет сообщений. Будьте первыми!</div>`;
+                container.innerHTML = `<div class="text-center text-xs text-gray-500 py-6 bg-card-theme rounded-2xl border border-white/5">Пока нет комментариев в базе.</div>`;
                 return;
             }
 
@@ -764,7 +749,6 @@
             });
         }
 
-        // Update statistics counter badges
         function updateStats() {
             const manhwaCount = Object.keys(dbCache.manhwas || {}).length;
             const commentsCount = Object.keys(dbCache.comments || {}).length;
@@ -772,51 +756,3 @@
             document.getElementById('statTotalManhwas').textContent = manhwaCount;
             document.getElementById('statTotalComments').textContent = commentsCount;
         }
-
-        // Comic Reader Modal Viewer
-        function openReader(title) {
-            document.getElementById('readerTitle').textContent = title;
-            const container = document.getElementById('readerContent');
-            container.innerHTML = `
-                <div class="p-6 rounded-2xl bg-gradient-to-b from-cyan-950 to-slate-950 border border-white/10 text-center text-sm font-medium text-gray-200 shadow-lg">
-                    <p class="italic">"Глава вебтуна загружена из базы данных ЧЕКАТ..."</p>
-                </div>
-                <div class="p-4 rounded-2xl bg-slate-900 border border-white/10 space-y-3 shadow-xl">
-                    <div class="text-[10px] uppercase font-bold text-cyan-400 tracking-wider">Панель 1: Начало истории</div>
-                    <div class="rounded-xl overflow-hidden bg-black/50 border border-white/5 p-6 text-center text-cyan-300 font-bold">
-                        [ Графическая иллюстрация вебтуна для "${escapeHtml(title)}" ]
-                    </div>
-                    <p class="text-xs text-gray-300 font-medium">Главный герой сталкивается с загадкой древних традиций и современных технологий.</p>
-                </div>
-                <div class="flex flex-col items-start space-y-1 my-2">
-                    <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-widest pl-2">Главный герой</span>
-                    <div class="speech-bubble text-xs text-slate-950 font-semibold shadow-md">
-                        Мы должны довести это дело до конца!
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('readerModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeReader() {
-            document.getElementById('readerModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        // HTML Escape helper
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/[&<>'"]/g, 
-                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-            );
-        }
-
-        // Initial load on window startup
-        window.onload = function() {
-            loadDataFromFirebase();
-        };
-    </script>
-</body>
-</html>
